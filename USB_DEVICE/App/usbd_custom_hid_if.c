@@ -91,23 +91,39 @@
 __ALIGN_BEGIN static uint8_t CUSTOM_HID_ReportDesc_FS[USBD_CUSTOM_HID_REPORT_DESC_SIZE] __ALIGN_END =
 {
   /* USER CODE BEGIN 0 */
-	0x06, 0x00, 0xFF,  // Usage Page (Vendor Defined 0xFF00)
-	0x09, 0x00,        // Usage (0x00)
-	0xA1, 0x01,        // Collection (Application)
-	0x09, 0x01,        //   Usage (0x01)
-	0x15, 0x00,        //   Logical Minimum (0)
-	0x26, 0xFF, 0x00,  //   Logical Maximum (255)
-	0x75, 0x08,        //   Report Size (8)
-	0x95, 0x40,        //   Report Count (64)
-	0x81, 0x00,        //   Input (Data,Array,Abs,No Wrap,Linear,Preferred State,No Null Position)
-	0x09, 0x02,        //   Usage (0x02)
-	0x15, 0x00,        //   Logical Minimum (0)
-	0x26, 0xFF, 0x00,  //   Logical Maximum (255)
-	0x75, 0x08,        //   Report Size (8)
-	0x95, 0x40,        //   Report Count (64)
-	0x91, 0x00,        //   Output (Data,Array,Abs,No Wrap,Linear,Preferred State,No Null Position,Non-volatile)
-	0xC0,              // End Collection
-	// 34 bytes
+//	0x06, 0x00, 0xFF,  // Usage Page (Vendor Defined 0xFF00)
+//	0x09, 0x00,        // Usage (0x00)
+//	0xA1, 0x01,        // Collection (Application)
+//	0x09, 0x01,        //   Usage (0x01)
+//	0x15, 0x00,        //   Logical Minimum (0)
+//	0x26, 0xFF, 0x00,  //   Logical Maximum (255)
+//	0x75, 0x08,        //   Report Size (8)
+//	0x95, 0x40,        //   Report Count (64)
+//	0x81, 0x00,        //   Input (Data,Array,Abs,No Wrap,Linear,Preferred State,No Null Position)
+//	0x09, 0x02,        //   Usage (0x02)
+//	0x15, 0x00,        //   Logical Minimum (0)
+//	0x26, 0xFF, 0x00,  //   Logical Maximum (255)
+//	0x75, 0x08,        //   Report Size (8)
+//	0x95, 0x40,        //   Report Count (64)
+//	0x91, 0x00,        //   Output (Data,Array,Abs,No Wrap,Linear,Preferred State,No Null Position,Non-volatile)
+//	0xC0,              // End Collection
+//	// 34 bytes
+	
+		0x05,   0x01,
+    0x09,   0x04,//joystick
+    0xA1,   0x00,
+
+    0x05,   0x01,
+    0x09,   0x30,//x
+    0x09,   0x31,//y
+    0x09,   0x32,//z
+    0x09,   0x33,//rx  旋转x轴
+    0x15,   0x00,//最小数据输入 0
+    0x25,   0x7F,//最大数据输入  127
+    0x75,   0x08,//数据字节 8
+    0x95,   0x04,//一次的数据个数 4个  即 x y z rx
+    0x81,   0x02,
+    0xc0//终止
   /* USER CODE END 0 */
       /*     END_COLLECTION	             */
 };

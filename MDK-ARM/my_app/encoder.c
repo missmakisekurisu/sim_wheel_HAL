@@ -1,7 +1,18 @@
 #include "encoder.h"
+#include "usbd_custom_hid_if.h"
 
 int currentRad = 0;
+extern USBD_HandleTypeDef hUsbDeviceFS;
 
+struct mouseHID_t {
+	 uint8_t x;
+      uint8_t y;
+      uint8_t buttons;
+     
+      int8_t wheel;
+ }; 
+ 
+struct mouseHID_t mouseHID;
 
 
 void key1_interupt_routine(void)
@@ -17,6 +28,7 @@ uint8_t encoder_read_position(void){
 //    if(currentRad > ENCODER_RESOLUTION || currentRad <(-ENCODER_RESOLUTION)){
 //        currentRad = 0;
 //    }  
+		
     
     //A->B: 00-10-01-00
     //B->A: 00-01-10-00    
@@ -47,7 +59,11 @@ uint8_t encoder_read_position(void){
             break;
         }
         default: state = 0;
-    }                
+    }        
+		if(currentRad < 0){currentRad = 0;}
+		if(currentRad > ENCODER_RESOLUTION){currentRad = ENCODER_RESOLUTION;}
+		mouseHID.x = 127U * currentRad/ENCODER_RESOLUTION;
+		USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&mouseHID, sizeof(struct mouseHID_t));		
     return 0;
 }
-   
+
